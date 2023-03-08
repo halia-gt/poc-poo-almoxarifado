@@ -16,7 +16,7 @@ export class ProductRepository {
         return await prisma.products.findMany();
     }
 
-    async update({ id, name, productClass, quantity }): Promise<void> {
+    async update({ id, name, productClass, quantity }: Product): Promise<void> {
         await prisma.products.update({
             where: {
               id,  

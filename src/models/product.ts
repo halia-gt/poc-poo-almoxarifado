@@ -4,7 +4,7 @@ export class Product {
     public productClass: string;
     public quantity: number;
 
-    constructor (name: string, productClass: string, quantity: number, id: number = -1) {
+    constructor ({ name, productClass, quantity, id }) {
         this.id = id;
         this.name = name;
         this.productClass = productClass;
