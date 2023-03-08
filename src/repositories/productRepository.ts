@@ -2,18 +2,6 @@ import { Product } from "../models/product";
 import prisma from "../database/db";
 
 export class ProductRepository {
-    private products: Product[];
-    protected static INSTANCE: ProductRepository;
-
-    constructor() {
-        this.products = [];
-    }
-
-    public static getInstance(): ProductRepository {
-        if (!this.INSTANCE) this.INSTANCE = new ProductRepository();
-        return this.INSTANCE;
-    }
-
     async create({ name, productClass, quantity }): Promise<void> {
         await prisma.products.create({
             data: {
