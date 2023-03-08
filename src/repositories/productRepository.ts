@@ -1,4 +1,5 @@
 import { Product } from "../models/product";
+import prisma from "../database/db";
 
 export class ProductRepository {
     private products: Product[];
@@ -13,8 +14,39 @@ export class ProductRepository {
         return this.INSTANCE;
     }
 
-    create({ name, productClass, quantity}) {
-        const product: Product = new Product(name, productClass, quantity);
-        
+    async create({ name, productClass, quantity }): Promise<void> {
+        await prisma.products.create({
+            data: {
+                name,
+                productClass,
+                quantity
+            }
+        });
+    }
+
+    async getAll(): Promise<Product[]> {
+        return await prisma.products.findMany();
+    }
+
+    async update({ id, name, productClass, quantity }): Promise<void> {
+        await prisma.products.update({
+            where: {
+              id,  
+            },
+            data: {
+                id,
+                name,
+                productClass,
+                quantity,
+            }
+        });
+    }
+
+    async delete(id: number): Promise<void> {
+        await prisma.products.delete({
+            where: {
+              id,  
+            },
+        });
     }
 }
